@@ -7,9 +7,7 @@ defineFeature(feature, test => {
   let result: any;
   
   test("Consultar clima para un personaje de Star Wars", ({ given, when, then }) => {
-    given("un personaje con ID 1", async () => {
-      // No es necesario hacer nada aquí.
-    });
+    given("un personaje con ID 1", async () => {});
 
     when("consulto el clima en la ubicación (40.7128, -74.006)", async () => {
       result = await weatherCharacter(1, 40.7128, -74.006);

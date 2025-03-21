@@ -52,6 +52,9 @@ package:
     - "!dist/**"
 
 functions:
+  authFunction:
+    handler: src/auth/auth-handler.handler
+
   mergeDataFunction:
     name: mergeDataFunction
     handler: src/handler.handler
@@ -61,6 +64,9 @@ functions:
           method: get
           cors: true
           private: true
+          authorizer:
+            type: request
+            identitySource: method.request.header.Authorization
 
   storeDataFunction:
     name: storeDataFunction
@@ -71,6 +77,9 @@ functions:
           method: post
           cors: true
           private: true
+          authorizer:
+            type: request
+            identitySource: method.request.header.Authorization
 
   getHistoryFunction:
     name: getHistoryFunction
@@ -81,6 +90,9 @@ functions:
           method: get
           cors: true
           private: true
+          authorizer:
+            type: request
+            identitySource: method.request.header.Authorization
 
 useDotenv: true
 
