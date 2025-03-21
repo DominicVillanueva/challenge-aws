@@ -120,6 +120,7 @@ git config --global user.email "tuemail@example.com"
 ---
 ## Autor
 
-Desarrollado por DominicAVS.
-Correo: [partner.dominic@hotmail.com]
-GitHub: [https://github.com/DominicVillanueva](https://github.com/DominicVillanueva)
+Desarrollado por Dominic Aybar Villanueva.  
+Correo: partner.dominic@hotmail.com  
+GitHub: [https://github.com/DominicVillanueva](https://github.com/DominicVillanueva)  
+
