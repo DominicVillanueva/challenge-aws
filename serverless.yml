@@ -1,0 +1,88 @@
+service: challenge-aws
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  apiGateway:
+    apiKeys:
+      - ChallengeApiKey-${sls:stage}-${sls:instanceId}
+    usagePlan:
+      quota:
+        limit: 1000
+        period: MONTH
+      throttle:
+        rateLimit: 10
+        burstLimit: 20
+  tracing:
+    apiGateway: true
+    lambda: true
+  stage: dev
+  region: us-east-1
+  architecture: arm64
+  deploymentBucket:
+    name: challenge-aws-rimac-12345
+  memorySize: 128
+  logRetentionInDays: 7
+  timeout: 5
+  environment:
+    OPENWEATHER_API_KEY: ${env:OPENWEATHER_API_KEY}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "dynamodb:*"
+        - "lambda:*"
+        - "cloudformation:*"
+        - "s3:*"
+        - "iam:*"
+        - "logs:*"
+        - "xray:*"
+      Resource: "*"
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-dotenv-plugin
+  - serverless-openapi-documentation
+  - serverless-aws-documentation
+
+package:
+  individually: true
+  patterns:
+    - "!node_modules/.cache/**"
+    - "!tests/**"
+    - "!dist/**"
+
+functions:
+  mergeDataFunction:
+    name: mergeDataFunction
+    handler: src/handler.handler
+    events:
+      - http:
+          path: fusionados
+          method: get
+          cors: true
+          private: true
+
+  storeDataFunction:
+    name: storeDataFunction
+    handler: src/api/handlers/store-handler.storeData
+    events:
+      - http:
+          path: almacenar
+          method: post
+          cors: true
+          private: true
+
+  getHistoryFunction:
+    name: getHistoryFunction
+    handler: src/api/handlers/history-handler.getHistory
+    events:
+      - http:
+          path: historial
+          method: get
+          cors: true
+          private: true
+
+useDotenv: true
+
+custom:
+  documentation: ${file(./documentation.yml)}

@@ -1,0 +1,39 @@
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+.yarn-integrity
+
+# Serverless Framework
+.serverless/
+.webpack/
+.aws-sam/
+.sst/
+.build/
+openapi.json
+
+# TypeScript
+*.tsbuildinfo
+dist/
+build/
+
+# Logs y debugging
+logs/
+*.log
+*.trace
+
+# AWS credentials y configuraciones
+.aws/
+
+# Jest (pruebas unitarias e integración con BDD)
+coverage/
+jest.config.js
+.vscode/
+.DS_Store
+
+# DynamoDB Local
+.dynamodb/
+
+# X-Ray
+xray-daemon.log

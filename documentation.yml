@@ -1,0 +1,49 @@
+api:
+  info:
+    version: "1.0.0"
+    title: "Challenge API"
+    description: "API para obtener datos de personajes de Star Wars con información meteorológica."
+
+models:
+  - name: WeatherCharacter
+    description: "Modelo de datos combinados de Star Wars y Clima"
+    contentType: "application/json"
+    schema:
+      type: object
+      properties:
+        characterName:
+          type: string
+          description: "Nombre del personaje"
+        planet:
+          type: string
+          description: "Nombre del planeta de origen"
+        planetClimate:
+          type: string
+          description: "Clima del planeta"
+        planetTerrain:
+          type: string
+          description: "Terreno del planeta"
+        weather:
+          type: object
+          properties:
+            temperature:
+              type: number
+              description: "Temperatura en Celsius"
+            humidity:
+              type: number
+              description: "Porcentaje de humedad"
+            description:
+              type: string
+              description: "Descripción del clima"
+            windSpeed:
+              type: number
+              description: "Velocidad del viento en m/s"
+
+paths:
+  /fusionados:
+    get:
+      summary: "Fusiona datos de Star Wars con información meteorológica"
+      description: "Obtiene los datos de un personaje de Star Wars y los combina con el clima actual basado en coordenadas."
+      responses:
+        "200":
+          description: "Datos fusionados exitosamente"
